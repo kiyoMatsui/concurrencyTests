@@ -10,8 +10,8 @@ struct data {
   std::atomic_bool flag1 = false;
   std::atomic_bool flag2 = false;  
   std::array<int, 5> a = {{1, 2, 3, 4, 5}};
-  char b[1000000]; // large array so probably no longer on same cache line.
-  //char b[1]; // i.e. all data on same cache line
+  //char b[1000000]; // large array so probably no longer on same cache line.
+  char b[1]; // i.e. all data on same cache line
   std::array<int, 5> c = {{1, 2, 3, 4, 5}};
 };
 
@@ -46,7 +46,7 @@ int main() {
   } 
   t1.join();
   auto end = std::chrono::high_resolution_clock::now();  
-  std::cout << "03FalseSharingTest runtime "
+  std::cout << "04NoFalseSharingTest runtime "
             << std::chrono::duration_cast<std::chrono::microseconds>(end-start).count()
             << " microseconds\n";
   return 0;
