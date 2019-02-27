@@ -85,6 +85,6 @@ endmacro()
 if (BUILD_TESTING)
     ADD_LIBRARY(catchMain ./unitTests/00CatchMain.cpp)
     enable_testing()
-    create_test(unitTests ./unitTests/unitTestsBook.cpp ${PROJECT_LIBS})
-
+    create_test(unitTestsBook ./unitTests/unitTestsBook.cpp ${PROJECT_LIBS})
+    create_test(unitTests ./unitTests/unitTests.cpp ${PROJECT_LIBS})
 endif (BUILD_TESTING)
