@@ -32,7 +32,7 @@ class threadPool {
     }
 
   ~threadPool() {
-    killFlag.store(true);
+    killFlag.exchange(true);
     for (auto& n : threads) {
       n.join();
     }
