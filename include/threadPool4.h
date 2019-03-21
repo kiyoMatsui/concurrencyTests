@@ -21,7 +21,7 @@ class threadPool {
               if (killFlag) break;
               std::this_thread::yield();
             } else {
-              std::function<void()> job = jobQueue.back();
+              std::function<void()> job = jobQueue.front();
               jobQueue.pop();
               m.unlock();
               job();
