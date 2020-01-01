@@ -7,7 +7,7 @@ SET(APPLICATION_VERSION_STRING 0.1)
 
 ## Project Output Paths
 SET(MAINFOLDER ${PROJECT_SOURCE_DIR})
-SET(EXECUTABLE_OUTPUT_PATH "${MAINFOLDER}/bin")
+SET(EXECUTABLE_OUTPUT_PATH "${MAINFOLDER}/../build/bin")
 
 ## Project Search Paths
 LIST(APPEND CMAKE_PREFIX_PATH "${MAINFOLDER}")
@@ -28,15 +28,21 @@ FILE(GLOB_RECURSE EXAMPLE_SRCS07 ${MAINFOLDER}/experiments/07exceptions.cpp ${MA
 
 ## Use compiler debugging flags per default
 INCLUDE(CxxFlags)
+set(CMAKE_CXX_STANDARD 17)
+IF(CMAKE_BUILD_TYPE MATCHES debug)
+   message("debug build")
+   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_DEBUG} -std=c++1z -g  -pthread")
+ELSEIF(CMAKE_BUILD_TYPE MATCHES threadSanitizer)
+   message("threadSanitizer build")
+   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z -fsanitize=thread -g -O1")
+ELSEIF(CMAKE_BUILD_TYPE MATCHES release)
+   message("release build")
+   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE} -std=c++1z -g  -pthread")
+ELSE()
+   message("release build with march=native")
+   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE} -std=c++1z -g -march=native -pthread")
+ENDIF()
 
-#debug
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_DEBUG} -std=c++1z  -pthread")
-
-#thread sanitizer
-#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z -fsanitize=thread -g -O1")
-
-#release
-#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE} -std=c++1z  -pthread")
 
 
 set(BUILD_TESTING true CACHE BOOL "Enable building of tests.")
