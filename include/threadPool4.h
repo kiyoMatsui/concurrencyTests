@@ -1,6 +1,6 @@
 #ifndef THREADPOOL4
 #define THREADPOOL4
-
+// probably exception unsafe... time to fix!
 #include <vector>
 #include <thread>
 #include <functional>
