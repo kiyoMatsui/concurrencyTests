@@ -1,5 +1,5 @@
 ## Project Properties
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 PROJECT(concurrencyTests)
 
 SET(APPLICATION_NAME "concurrencyTests")
@@ -40,7 +40,7 @@ ELSE()
 ENDIF()
 
 
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(BUILD_TESTING true CACHE BOOL "Enable building of tests.")
 
 ## Creating Binaries for examples
